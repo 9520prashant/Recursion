@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void toh(int n, vector<int> &source, vector<int> &dest, vector<int> &aux, char s, char d, char a)
+{
+	if (n == 0)
+	{
+		return;
+	}
+	if (n == 1)
+	{
+		int temp = source.back();
+		source.pop_back();
+		dest.push_back(temp);
+		cout <<"Disk "<< temp << " moved from " << s << " to " << d << endl;
+		return;
+	}
+	toh(n - 1, source, aux, dest, s, a, d);
+	int temp = source.back();
+	source.pop_back();
+	dest.push_back(temp);
+	cout <<"Disk "<< temp << " moved from " << s << " to " << d << endl;
+	toh(n - 1, aux, dest, source, a, d, s);
+	return;
+}
+
+int main()
+{
+	vector<int> s, d, a;
+	d = {};
+	a = {};
+	int n;
+	cin >> n;
+	for (int i = n; i > 0; --i)
+	{
+		s.push_back(i);
+	}
+	toh(n, s, d, a, 'A', 'C', 'B');
+	return 0;
+}
