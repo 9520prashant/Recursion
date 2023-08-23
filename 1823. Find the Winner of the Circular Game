@@ -1,0 +1,24 @@
+// Josephush Problem
+class Solution {
+public:
+    void solve(vector<int> arr, int k, int ind, int &ans){
+        if(arr.size() == 1){
+            ans = arr[0];
+            return;
+        }
+        ind = (ind+k)%arr.size();
+        arr.erase(arr.begin()+ind);
+        solve(arr, k, ind, ans);
+    }
+    int findTheWinner(int n, int k) {
+        vector<int> v;
+        for(int i=1;i<=n;i++){
+            v.push_back(i);
+        }
+        k--;
+        int ind = 0;
+        int ans = -1;
+        solve(v,k,ind,ans);
+        return ans;
+    }
+};
